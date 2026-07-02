@@ -37,18 +37,7 @@
         return;
     }
 
-    if ([SCIUtils getBoolPref:@"refresh_reel_confirm"]) {
-        NSLog(@"[SCInsta] Reel refresh triggered");
-        
-        [SCIUtils showConfirmation:^(void) { %orig(arg1, arg2); }
-                     cancelHandler:^(void) {
-                         IGRefreshControl *_refreshControl = MSHookIvar<IGRefreshControl *>(self, "_refreshControl");
-                         [self refreshControlDidEndFinishLoadingAnimation:_refreshControl];
-                     }
-                             title:@"Refresh Reels"];
-    } else {
-        return %orig(arg1, arg2);
-    }
+    return %orig(arg1, arg2);
 }
 %end
 
