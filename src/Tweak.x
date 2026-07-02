@@ -7,8 +7,7 @@
 
 // Screenshot handlers
 
-#define VOID_HANDLESCREENSHOT(orig) [SCIUtils getBoolPref:@"remove_screenshot_alert"] ? nil : orig;
-#define NONVOID_HANDLESCREENSHOT(orig) return VOID_HANDLESCREENSHOT(orig)
+
 
 ///////////////////////////////////////////////////////////
 
@@ -95,19 +94,19 @@ BOOL dmVisualMsgsViewedButtonEnabled = false;
 
 %hook IGDSLauncherConfig
 - (_Bool)isLiquidGlassInAppNotificationEnabled {
-    return [SCIUtils liquidGlassEnabledBool:%orig];
+    return [SCIUtils liquidGlassEnabledBool:%orig()];
 }
 - (_Bool)isLiquidGlassContextMenuEnabled{
-    return [SCIUtils liquidGlassEnabledBool:%orig];
+    return [SCIUtils liquidGlassEnabledBool:%orig()];
 }
 - (_Bool)isLiquidGlassToastEnabled {
-    return [SCIUtils liquidGlassEnabledBool:%orig];
+    return [SCIUtils liquidGlassEnabledBool:%orig()];
 }
 - (_Bool)isLiquidGlassToastPeekEnabled {
-    return [SCIUtils liquidGlassEnabledBool:%orig];
+    return [SCIUtils liquidGlassEnabledBool:%orig()];
 }
 - (_Bool)isLiquidGlassAlertDialogEnabled {
-    return [SCIUtils liquidGlassEnabledBool:%orig];
+    return [SCIUtils liquidGlassEnabledBool:%orig()];
 }
 %end
 
@@ -136,57 +135,9 @@ shouldPersistLastBugReportId:(id)arg6
 %end
 
 // Disable screenshot logging/detection
-%hook IGDirectVisualMessageViewerSession
-- (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 { NONVOID_HANDLESCREENSHOT(%orig); }
-%end
 
-%hook IGDirectVisualMessageReplayService
-- (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 { NONVOID_HANDLESCREENSHOT(%orig); }
-%end
 
-%hook IGDirectVisualMessageReportService
-- (id)visualMessageViewerController:(id)arg1 didDetectScreenshotForVisualMessage:(id)arg2 atIndex:(NSInteger)arg3 { NONVOID_HANDLESCREENSHOT(%orig); }
-%end
 
-%hook IGDirectVisualMessageScreenshotSafetyLogger
-- (id)initWithUserSession:(id)arg1 entryPoint:(NSInteger)arg2 {
-    if ([SCIUtils getBoolPref:@"remove_screenshot_alert"]) {
-        NSLog(@"[SCInsta] Disable visual message screenshot safety logger");
-        return nil;
-    }
-
-    return %orig;
-}
-%end
-
-%hook IGScreenshotObserver
-- (id)initForController:(id)arg1 { NONVOID_HANDLESCREENSHOT(%orig); }
-%end
-
-%hook IGScreenshotObserverDelegate
-- (void)screenshotObserverDidSeeScreenshotTaken:(id)arg1 { VOID_HANDLESCREENSHOT(%orig); }
-- (void)screenshotObserverDidSeeActiveScreenCapture:(id)arg1 event:(NSInteger)arg2 { VOID_HANDLESCREENSHOT(%orig); }
-%end
-
-%hook IGDirectMediaViewerViewController
-- (void)screenshotObserverDidSeeScreenshotTaken:(id)arg1 { VOID_HANDLESCREENSHOT(%orig); }
-- (void)screenshotObserverDidSeeActiveScreenCapture:(id)arg1 event:(NSInteger)arg2 { VOID_HANDLESCREENSHOT(%orig); }
-%end
-
-%hook IGStoryViewerViewController
-- (void)screenshotObserverDidSeeScreenshotTaken:(id)arg1 { VOID_HANDLESCREENSHOT(%orig); }
-- (void)screenshotObserverDidSeeActiveScreenCapture:(id)arg1 event:(NSInteger)arg2 { VOID_HANDLESCREENSHOT(%orig); }
-%end
-
-%hook IGSundialFeedViewController
-- (void)screenshotObserverDidSeeScreenshotTaken:(id)arg1 { VOID_HANDLESCREENSHOT(%orig); }
-- (void)screenshotObserverDidSeeActiveScreenCapture:(id)arg1 event:(NSInteger)arg2 { VOID_HANDLESCREENSHOT(%orig); }
-%end
-
-%hook IGDirectVisualMessageViewerController
-- (void)screenshotObserverDidSeeScreenshotTaken:(id)arg1 { VOID_HANDLESCREENSHOT(%orig); }
-- (void)screenshotObserverDidSeeActiveScreenCapture:(id)arg1 event:(NSInteger)arg2 { VOID_HANDLESCREENSHOT(%orig); }
-%end
 
 /////////////////////////////////////////////////////////////////////////////
 
