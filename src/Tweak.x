@@ -135,9 +135,7 @@ shouldPersistLastBugReportId:(id)arg6
 %end
 
 // Disable anti-screenshot feature on visual messages
-%hook IGStoryViewerContainerView
-- (void)setShouldBlockScreenshot:(BOOL)arg1 viewModel:(id)arg2 { VOID_HANDLESCREENSHOT(%orig); }
-%end
+
 
 // Disable screenshot logging/detection
 
