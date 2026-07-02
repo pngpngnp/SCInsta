@@ -8,25 +8,25 @@
     return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(enabled);
 }
 + (_Bool)isQuicksnapEnabledInFeed:(id)feed {
-    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(feed)
+    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(feed);
 }
 + (_Bool)isQuicksnapEnabledInInbox:(id)inbox {
-    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(inbox)
+    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(inbox);
 }
 + (_Bool)isQuicksnapEnabledInStories:(id)stories {
-    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(stories)
+    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(stories);
 }
 + (_Bool)isQuicksnapEnabledInNotesTray:(id)tray {
-    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(tray)
+    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(tray);
 }
 + (_Bool)isQuicksnapEnabledInNotesTrayWithPeek:(id)peek {
-    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(peek)
+    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(peek);
 }
 + (_Bool)isQuicksnapEnabledInNotesTrayWithPog:(id)pog {
-    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(pog)
+    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(pog);
 }
 + (_Bool)isQuicksnapNotesTrayEmptyPogEnabled:(id)enabled {
-    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(enabled)
+    return [SCIUtils getBoolPref:@"disable_instants_creation"] ? false : %orig(enabled);
 }
 // + (_Bool)isStoriesSpringEnabled:(id)enabled {
 //     return true;
