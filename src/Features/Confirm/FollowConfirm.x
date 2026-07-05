@@ -18,16 +18,7 @@
 // Follow button on profile page
 %hook IGFollowController
 - (void)_didPressFollowButton {
-    // Get user follow status (check if already following user)
-    NSInteger UserFollowStatus = self.user.followStatus;
-
-    // Only show confirm dialog if user is not following
-    if (UserFollowStatus == 2) {
-        CONFIRMFOLLOW(%orig);
-    }
-    else {
-        return %orig;
-    }
+    return %orig();
 }
 %end
 
@@ -44,33 +35,36 @@
 // Suggested for you (home feed & profile) follow button
 %hook IGHScrollAYMFCell
 - (void)_didTapAYMFActionButton {
-    CONFIRMFOLLOW(%orig);
+    return %orig();
 }
 %end
+
 %hook IGHScrollAYMFActionButton
+
 - (void)_didTapTextActionButton {
-    CONFIRMFOLLOW(%orig);
+    return %orig();
 }
+
 %end
 
 // Follow button on reels
 %hook IGUnifiedVideoFollowButton
 - (void)_hackilyHandleOurOwnButtonTaps:(id)arg1 event:(id)arg2 {
-    CONFIRMFOLLOW(%orig);
+    return %orig(arg1, arg2);
 }
 %end
 
 // Follow text on profile (when collapsed into top bar) 
 %hook IGProfileViewController
 - (void)navigationItemsControllerDidTapHeaderFollowButton:(id)arg1 {
-    CONFIRMFOLLOW(%orig);
+    return %orig(arg1);
 }
 %end
 
 // Follow button on suggested friends (in story section)
 %hook IGStorySectionController
 - (void)followButtonTapped:(id)arg1 cell:(id)arg2 {
-    CONFIRMFOLLOW(%orig);
+    return %orig(arg1, arg2);
 }
 %end
 
